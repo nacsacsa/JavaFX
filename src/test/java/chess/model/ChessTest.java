@@ -3,6 +3,7 @@ package chess.model;
 import chess.model.Chess;
 import chess.model.ChessPieces;
 import chess.model.Posititon;
+import chess.model.utils.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -102,11 +103,44 @@ public class ChessTest {
     }
     @Test
     public void isLegalMoveTest() {
+        assertTrue(initial.isLegalMove(new Posititon(6, 3), new Posititon(4, 3)));
+        assertTrue(initial.isLegalMove(new Posititon(6, 3), new Posititon(5, 3)));
+        assertFalse(initial.isLegalMove(new Posititon(6, 3), new Posititon(3, 3)));
+        assertTrue(initial.isLegalMove(new Posititon(7, 1), new Posititon(5, 0)));
+        assertTrue(initial.isLegalMove(new Posititon(7, 1), new Posititon(5, 2)));
+        assertFalse(initial.isLegalMove(new Posititon(7, 0), new Posititon(3, 0)));
+        assertFalse(initial.isLegalMove(new Posititon(7, 2), new Posititon(6, 1)));
+        assertFalse(initial.isLegalMove(new Posititon(1, 4), new Posititon(2, 4)));
+        assertFalse(initial.isLegalMove(new Posititon(8, 8), new Posititon(3, 3)));
+        assertFalse(initial.isLegalMove(new Posititon(8, 0), new Posititon(9, 9)));
+        assertFalse(initial.isLegalMove(new Posititon(-1, -1), new Posititon(-2, -2)));
+        assertFalse(initial.isLegalMove(new Posititon(-4, -4), new Posititon(4, 3)));
 
+        assertTrue(inGameState.isLegalMove(new Posititon(4, 3), new Posititon(3, 2)));
+        assertFalse(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(4, 5)));
+        assertFalse(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(3, 6)));
+        assertFalse(inGameState.isLegalMove(new Posititon(4, 2), new Posititon(3, 2)));
+        assertTrue(inGameState.isLegalMove(new Posititon(4, 0), new Posititon(2, 2)));
+        assertTrue(inGameState.isLegalMove(new Posititon(4, 0), new Posititon(1, 3)));
+        assertFalse(inGameState.isLegalMove(new Posititon(0, 2), new Posititon(0, 1)));
+        assertFalse(inGameState.isLegalMove(new Posititon(1, 1), new Posititon(6, 6)));
+        assertFalse(inGameState.isLegalMove(new Posititon(4, 2), new Posititon(5, 2)));
+        assertTrue(inGameState.isLegalMove(new Posititon(7, 1), new Posititon(6, 3)));
+        assertTrue(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(6, 3)));
+
+        assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 1), new Posititon(1, 3)));
+        assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(1, 3)));
+        assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 4), new Posititon(1, 3)));
+        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 5), new Posititon(1, 4)));
+        assertFalse(inCheckMateState.isLegalMove(new Posititon(3, 2), new Posititon(2, 2)));
+        assertFalse(inCheckMateState.isLegalMove(new Posititon(6, 0), new Posititon(5, 0)));
     }
     @Test
     public void getNextPlayerTest() {
-
+        assertEquals(State.Player.PLAYER_1, initial.getNextPlayer());
+        assertEquals(State.Player.PLAYER_1, inGameState.getNextPlayer());
+        assertEquals(State.Player.PLAYER_2, inCheckMateState.getNextPlayer());
+        assertEquals(State.Player.PLAYER_1, inWinState.getNextPlayer());
     }
     @Test
     public void isGameOverTest() {
@@ -116,10 +150,52 @@ public class ChessTest {
     }
     @Test
     public void isLegalToMoveFromTest() {
+        assertTrue(initial.isLegalToMoveFrom(new Posititon(6, 3)));
+        assertTrue(initial.isLegalToMoveFrom(new Posititon(7, 1)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 0)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 3)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 2)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 4)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 0)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 1)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 2)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 3)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 4)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(1, 0)));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(1, 4)));
 
+        assertTrue(inGameState.isLegalToMoveFrom(new Posititon(4, 0)));
+        assertTrue(inGameState.isLegalToMoveFrom(new Posititon(4, 3)));
+        assertTrue(inGameState.isLegalToMoveFrom(new Posititon(5, 4)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(4, 2)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(7, 0)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(7, 5)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 0)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 1)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 2)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 3)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(3, 2)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(8, 3)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(3, 8)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(8, 8)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(-1, -1)));
+
+        assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 1)));
+        assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 3)));
+        assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 4)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 0)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(1, 1)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 5)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(2, 4)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(1, 3)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(4, 2)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(7, 1)));
     }
     @Test
     public void getStatusTest() {
-
+        assertEquals(State.Status.IN_PROGRESS, initial.getStatus());
+        assertEquals(State.Status.IN_PROGRESS, inGameState.getStatus());
+        assertEquals(State.Status.IN_PROGRESS, inCheckMateState.getStatus());
+        assertEquals(State.Status.PLAYER_2_WINS, inWinState.getStatus());
     }
 }

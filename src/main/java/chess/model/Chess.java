@@ -31,9 +31,9 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
     private ChessPieces blackBackLine(int col) {
         ChessPieces chessPiece;
         switch (col) {
-            case 0,7 -> chessPiece = ChessPieces.BLACK_ROOK;
-            case 1,6 -> chessPiece = ChessPieces.BLACK_KNIGHT;
-            case 2,5 -> chessPiece = ChessPieces.BLACK_BISHOP;
+            case 0, 7 -> chessPiece = ChessPieces.BLACK_ROOK;
+            case 1, 6 -> chessPiece = ChessPieces.BLACK_KNIGHT;
+            case 2, 5 -> chessPiece = ChessPieces.BLACK_BISHOP;
             case 3 -> chessPiece = ChessPieces.BLACK_QUEEN;
             case 4 -> chessPiece = ChessPieces.BLACK_KING;
             default -> chessPiece = ChessPieces.EMPTY;
@@ -62,7 +62,9 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         return board[row][col].get();
     }
 
-
+    /**
+     * {@return whether it is checkmate}
+     */
     public boolean isCheckMate() {
         return false;
     }
