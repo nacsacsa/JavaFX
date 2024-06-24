@@ -1,6 +1,7 @@
 package chess.model;
 
 public enum ChessPieces {
+    NONE,
     EMPTY,
     BLACK_PAWN,
     WHITE_PAWN,
@@ -13,6 +14,5 @@ public enum ChessPieces {
     BLACK_KING,
     WHITE_KING,
     BLACK_QUEEN,
-    WHITE_QUEEN;
-
+    WHITE_QUEEN
 }

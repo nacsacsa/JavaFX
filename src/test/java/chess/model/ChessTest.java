@@ -1,12 +1,10 @@
 package chess.model;
 
-import chess.model.Chess;
-import chess.model.ChessPieces;
-import chess.model.Posititon;
 import chess.model.utils.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static chess.model.Chess.BOARD_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ChessTest {
@@ -60,46 +58,63 @@ public class ChessTest {
     }
 
     @Test
+    public void checkMateBoardTest1() {
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            assertTrue(initial.checkMateBoard[1][i]);
+            assertTrue(initial.checkMateBoard[2][i]);
+            assertFalse(initial.checkMateBoard[3][i]);
+            assertFalse(initial.checkMateBoard[4][i]);
+            assertFalse(initial.checkMateBoard[5][i]);
+            assertFalse(initial.checkMateBoard[6][i]);
+            assertFalse(initial.checkMateBoard[7][i]);
+            if (i == 0 || i == 7) {
+                assertFalse(initial.checkMateBoard[0][i]);
+            }
+            else assertTrue(initial.checkMateBoard[0][i]);
+        }
+    }
+
+    @Test
     public void ChessConstructorTest() {
-        for (var i = 0; i < Chess.BOARD_SIZE; i++) {
-            assertEquals(ChessPieces.BLACK_PAWN, initial.get(1, i));
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            assertEquals(ChessPieces.BLACK_PAWN, initial.getPiece(1, i));
         }
 
-        for (var i = 0; i < Chess.BOARD_SIZE; i++) {
-            assertEquals(ChessPieces.WHITE_PAWN, initial.get(6, i));
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            assertEquals(ChessPieces.WHITE_PAWN, initial.getPiece(6, i));
         }
-        assertEquals(ChessPieces.BLACK_ROOK, initial.get(0, 0));
-        assertEquals(ChessPieces.BLACK_ROOK, initial.get(0, 7));
-        assertEquals(ChessPieces.BLACK_KNIGHT, initial.get(0, 1));
-        assertEquals(ChessPieces.BLACK_KNIGHT, initial.get(0, 6));
-        assertEquals(ChessPieces.BLACK_BISHOP, initial.get(0, 2));
-        assertEquals(ChessPieces.BLACK_BISHOP, initial.get(0, 5));
-        assertEquals(ChessPieces.BLACK_QUEEN, initial.get(0, 3));
-        assertEquals(ChessPieces.BLACK_KING, initial.get(0, 4));
+        assertEquals(ChessPieces.BLACK_ROOK, initial.getPiece(0, 0));
+        assertEquals(ChessPieces.BLACK_ROOK, initial.getPiece(0, 7));
+        assertEquals(ChessPieces.BLACK_KNIGHT, initial.getPiece(0, 1));
+        assertEquals(ChessPieces.BLACK_KNIGHT, initial.getPiece(0, 6));
+        assertEquals(ChessPieces.BLACK_BISHOP, initial.getPiece(0, 2));
+        assertEquals(ChessPieces.BLACK_BISHOP, initial.getPiece(0, 5));
+        assertEquals(ChessPieces.BLACK_QUEEN, initial.getPiece(0, 3));
+        assertEquals(ChessPieces.BLACK_KING, initial.getPiece(0, 4));
 
-        assertEquals(ChessPieces.WHITE_ROOK, initial.get(7, 0));
-        assertEquals(ChessPieces.WHITE_ROOK, initial.get(7, 7));
-        assertEquals(ChessPieces.WHITE_KNIGHT, initial.get(7, 1));
-        assertEquals(ChessPieces.WHITE_KNIGHT, initial.get(7, 6));
-        assertEquals(ChessPieces.WHITE_BISHOP, initial.get(7, 2));
-        assertEquals(ChessPieces.WHITE_BISHOP, initial.get(7, 5));
-        assertEquals(ChessPieces.WHITE_QUEEN, initial.get(7, 3));
-        assertEquals(ChessPieces.WHITE_KING, initial.get(7, 4));
+        assertEquals(ChessPieces.WHITE_ROOK, initial.getPiece(7, 0));
+        assertEquals(ChessPieces.WHITE_ROOK, initial.getPiece(7, 7));
+        assertEquals(ChessPieces.WHITE_KNIGHT, initial.getPiece(7, 1));
+        assertEquals(ChessPieces.WHITE_KNIGHT, initial.getPiece(7, 6));
+        assertEquals(ChessPieces.WHITE_BISHOP, initial.getPiece(7, 2));
+        assertEquals(ChessPieces.WHITE_BISHOP, initial.getPiece(7, 5));
+        assertEquals(ChessPieces.WHITE_QUEEN, initial.getPiece(7, 3));
+        assertEquals(ChessPieces.WHITE_KING, initial.getPiece(7, 4));
     }
 
     @Test
     public void makeMoveTest() {
         initial.makeMove(new Posititon(6,4), new Posititon(4, 4));
-        assertEquals(ChessPieces.EMPTY, initial.get(6, 4));
-        assertEquals(ChessPieces.WHITE_PAWN, initial.get(4, 4));
+        assertEquals(ChessPieces.EMPTY, initial.getPiece(6, 4));
+        assertEquals(ChessPieces.WHITE_PAWN, initial.getPiece(4, 4));
 
         inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
-        assertEquals(ChessPieces.EMPTY, inGameState.get(4, 3));
-        assertEquals(ChessPieces.WHITE_PAWN, inGameState.get(3, 2));
+        assertEquals(ChessPieces.EMPTY, inGameState.getPiece(4, 3));
+        assertEquals(ChessPieces.WHITE_PAWN, inGameState.getPiece(3, 2));
 
         inCheckMateState.makeMove(new Posititon(0, 1), new Posititon(1, 3));
-        assertEquals(ChessPieces.EMPTY, inCheckMateState.get(0, 1));
-        assertEquals(ChessPieces.BLACK_KNIGHT, inCheckMateState.get(1, 3));
+        assertEquals(ChessPieces.EMPTY, inCheckMateState.getPiece(0, 1));
+        assertEquals(ChessPieces.BLACK_KNIGHT, inCheckMateState.getPiece(1, 3));
     }
     @Test
     public void isLegalMoveTest() {
