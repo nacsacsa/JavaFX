@@ -52,9 +52,9 @@ public class ChessTest {
 
     @Test
     public void isCheckMateTest() {
-        assertTrue(inCheckMateState.isCheckMate());
-        assertFalse(initial.isCheckMate());
-        assertTrue(inWinState.isCheckMate());
+        assertTrue(inCheckMateState.isCheckMate(inCheckMateState.checkMateBoard));
+        assertFalse(initial.isCheckMate(initial.checkMateBoard));
+        assertTrue(inWinState.isCheckMate(inWinState.checkMateBoard));
     }
 
     @Test
@@ -71,6 +71,53 @@ public class ChessTest {
                 assertFalse(initial.checkMateBoard[0][i]);
             }
             else assertTrue(initial.checkMateBoard[0][i]);
+        }
+    }
+
+    @Test
+    public void checkMateBoardTest2() {
+        initial.makeMove(new Posititon(6, 3), new Posititon(5, 3));
+        assertFalse(initial.checkMateBoard[2][0]);
+        assertFalse(initial.checkMateBoard[2][1]);
+        assertFalse(initial.checkMateBoard[2][2]);
+        assertFalse(initial.checkMateBoard[2][3]);
+        assertFalse(initial.checkMateBoard[2][4]);
+        assertFalse(initial.checkMateBoard[2][5]);
+        assertFalse(initial.checkMateBoard[2][6]);
+        assertTrue(initial.checkMateBoard[2][7]);
+
+        assertFalse(initial.checkMateBoard[3][0]);
+        assertFalse(initial.checkMateBoard[3][1]);
+        assertFalse(initial.checkMateBoard[3][2]);
+        assertFalse(initial.checkMateBoard[3][3]);
+        assertFalse(initial.checkMateBoard[3][4]);
+        assertFalse(initial.checkMateBoard[3][5]);
+        assertTrue(initial.checkMateBoard[3][6]);
+        assertFalse(initial.checkMateBoard[3][7]);
+
+        assertFalse(initial.checkMateBoard[4][0]);
+        assertFalse(initial.checkMateBoard[4][1]);
+        assertTrue(initial.checkMateBoard[4][2]);
+        assertFalse(initial.checkMateBoard[4][3]);
+        assertTrue(initial.checkMateBoard[4][4]);
+        assertTrue(initial.checkMateBoard[4][5]);
+        assertFalse(initial.checkMateBoard[4][6]);
+        assertFalse(initial.checkMateBoard[4][7]);
+
+        assertFalse(initial.checkMateBoard[7][0]);
+        assertFalse(initial.checkMateBoard[7][7]);
+        assertTrue(initial.checkMateBoard[7][1]);
+        assertTrue(initial.checkMateBoard[7][2]);
+        assertTrue(initial.checkMateBoard[7][3]);
+        assertTrue(initial.checkMateBoard[7][4]);
+        assertTrue(initial.checkMateBoard[7][5]);
+        assertTrue(initial.checkMateBoard[7][6]);
+
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            assertTrue(initial.checkMateBoard[6][i]);
+            assertTrue(initial.checkMateBoard[5][i]);
+            assertFalse(initial.checkMateBoard[0][i]);
+            assertFalse(initial.checkMateBoard[1][i]);
         }
     }
 
@@ -195,7 +242,10 @@ public class ChessTest {
         assertFalse(inGameState.isLegalToMoveFrom(new Posititon(8, 8)));
         assertFalse(inGameState.isLegalToMoveFrom(new Posititon(-1, -1)));
 
+        assertEquals(ChessPieces.WHITE_QUEEN, inCheckMateState.getPiece(1, 3));
         assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 1)));
+        assertEquals(ChessPieces.WHITE_QUEEN, inCheckMateState.getPiece(1, 3));
+        assertTrue(inCheckMateState.isCheckMate(inCheckMateState.checkMateBoard));
         assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 3)));
         assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 4)));
         assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 0)));

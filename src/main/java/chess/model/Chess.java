@@ -27,60 +27,103 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
             }
         }
         player = Player.PLAYER_1;
-        createCheckMate();
+        createCheckMate(checkMateBoard ,board, player);
     }
 
-    private void checkMateReset() {
+    private void checkMateReset(boolean[][] board) {
         for (var i = 0; i < BOARD_SIZE; i++) {
             for (var j = 0; j < BOARD_SIZE; j++) {
-                checkMateBoard[i][j] = false;
+                board[i][j] = false;
             }
         }
     }
 
-    private void createCheckMate() {
-        checkMateReset();
+    private void createCheckMate(boolean[][] checkMateBoard, ReadOnlyObjectWrapper<ChessPieces>[][] board, Player player) {
+        checkMateReset(checkMateBoard);
         switch (player) {
-            case PLAYER_1 -> fillBlackCheckMateTable();
-            case PLAYER_2 -> fillWhiteCheckMateTable();
+            case PLAYER_1 -> fillBlackCheckMateTable(checkMateBoard, board);
+            case PLAYER_2 -> fillWhiteCheckMateTable(checkMateBoard, board);
         }
     }
 
-    private void fillWhiteCheckMateTable() {
+    private void createCheckMate(boolean[][] checkMateBoard, ChessPieces[][] board, Player player) {
+        checkMateReset(checkMateBoard);
+        switch (player) {
+            case PLAYER_1 -> fillBlackCheckMateTable(checkMateBoard, board);
+            case PLAYER_2 -> fillWhiteCheckMateTable(checkMateBoard, board);
+        }
+    }
+
+    private void fillWhiteCheckMateTable(boolean[][] checkMateBoard, ChessPieces[][] board) {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
-                if (blackEnemy(new Posititon(row, col))) {
-                    switch (board[row][col].get()) {
-                        case WHITE_PAWN -> whitePawnHitZone(new Posititon(row, col));
-                        case WHITE_KNIGHT -> knightHitZone(new Posititon(row, col));
-                        case WHITE_ROOK -> rookHitZone(new Posititon(row, col));
-                        case WHITE_BISHOP -> bishopHitZone(new Posititon(row, col));
-                        case WHITE_KING -> kingHitZone(new Posititon(row, col));
-                        case WHITE_QUEEN -> queenHitZone(new Posititon(row, col));
+                if (whiteEnemy(new Posititon(row, col))) {
+                    switch (board[row][col]) {
+                        case WHITE_PAWN -> whitePawnHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_KNIGHT -> knightHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_ROOK -> rookHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_BISHOP -> bishopHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_KING -> kingHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_QUEEN -> queenHitZone(new Posititon(row, col), checkMateBoard);
                     }
                 }
             }
         }
     }
 
-    private void fillBlackCheckMateTable() {
+
+    private void fillWhiteCheckMateTable(boolean[][] checkMateBoard, ReadOnlyObjectWrapper<ChessPieces>[][] board) {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
-                if (blackEnemy(new Posititon(row, col))) {
+                if (whiteEnemy(new Posititon(row, col))) {
                     switch (board[row][col].get()) {
-                        case BLACK_PAWN -> blackPawnHitZone(new Posititon(row, col));
-                        case BLACK_KNIGHT -> knightHitZone(new Posititon(row, col));
-                        case BLACK_ROOK -> rookHitZone(new Posititon(row, col));
-                        case BLACK_BISHOP -> bishopHitZone(new Posititon(row, col));
-                        case BLACK_KING -> kingHitZone(new Posititon(row, col));
-                        case BLACK_QUEEN -> queenHitZone(new Posititon(row, col));
+                        case WHITE_PAWN -> whitePawnHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_KNIGHT -> knightHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_ROOK -> rookHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_BISHOP -> bishopHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_KING -> kingHitZone(new Posititon(row, col), checkMateBoard);
+                        case WHITE_QUEEN -> queenHitZone(new Posititon(row, col), checkMateBoard);
                     }
                 }
             }
         }
     }
 
-    private void whitePawnHitZone(Posititon posititon) {
+    private void fillBlackCheckMateTable(boolean[][] checkMateBoard, ChessPieces[][] board) {
+        for (var row = 0; row < BOARD_SIZE; row++) {
+            for (var col = 0; col < BOARD_SIZE; col++) {
+                if (blackEnemy(new Posititon(row, col))) {
+                    switch (board[row][col]) {
+                        case BLACK_PAWN -> blackPawnHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_KNIGHT -> knightHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_ROOK -> rookHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_BISHOP -> bishopHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_KING -> kingHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_QUEEN -> queenHitZone(new Posititon(row, col), checkMateBoard);
+                    }
+                }
+            }
+        }
+    }
+
+    private void fillBlackCheckMateTable(boolean[][] checkMateBoard,  ReadOnlyObjectWrapper<ChessPieces>[][] board) {
+        for (var row = 0; row < BOARD_SIZE; row++) {
+            for (var col = 0; col < BOARD_SIZE; col++) {
+                if (blackEnemy(new Posititon(row, col))) {
+                    switch (board[row][col].get()) {
+                        case BLACK_PAWN -> blackPawnHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_KNIGHT -> knightHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_ROOK -> rookHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_BISHOP -> bishopHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_KING -> kingHitZone(new Posititon(row, col), checkMateBoard);
+                        case BLACK_QUEEN -> queenHitZone(new Posititon(row, col), checkMateBoard);
+                    }
+                }
+            }
+        }
+    }
+
+    private void whitePawnHitZone(Posititon posititon, boolean[][] checkMateBoard) {
         if (isOnBoard(new Posititon(posititon.row() - 1, posititon.col() + 1))) {
             checkMateBoard[posititon.row() - 1][posititon.col() + 1] = true;
         }
@@ -89,12 +132,12 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         }
     }
 
-    private void queenHitZone(Posititon posititon) {
-        bishopHitZone(posititon);
-        rookHitZone(posititon);
+    private void queenHitZone(Posititon posititon, boolean[][] checkMateBoard) {
+        bishopHitZone(posititon, checkMateBoard);
+        rookHitZone(posititon, checkMateBoard);
     }
 
-    private void bishopHitZone(Posititon posititon) {
+    private void bishopHitZone(Posititon posititon, boolean[][] checkMateBoard) {
         boolean legalMove = false;
 
         for (var i = 1; i < BOARD_SIZE; i++) {
@@ -174,7 +217,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         }
     }
 
-    private void rookHitZone(Posititon posititon) {
+    private void rookHitZone(Posititon posititon, boolean[][] checkMateBoard) {
         boolean legalMove = false;
 
         for (var i = 1; i < BOARD_SIZE; i++) {
@@ -254,7 +297,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         }
     }
 
-    private void kingHitZone(Posititon posititon) {
+    private void kingHitZone(Posititon posititon, boolean[][] checkMateBoard) {
         if (isOnBoard(new Posititon(posititon.row() + 1, posititon.col() + 1))) {
             checkMateBoard[posititon.row() + 1][posititon.col() + 1] = true;
         }
@@ -281,7 +324,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         }
     }
 
-    private void blackPawnHitZone(Posititon posititon) {
+    private void blackPawnHitZone(Posititon posititon, boolean[][] checkMateBoard) {
             if (isOnBoard(new Posititon(posititon.row() + 1, posititon.col() + 1))) {
                 checkMateBoard[posititon.row() + 1][posititon.col() + 1] = true;
             }
@@ -290,7 +333,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
             }
     }
 
-    private void knightHitZone(Posititon posititon) {
+    private void knightHitZone(Posititon posititon, boolean[][] checkMateBoard) {
         if (isOnBoard(new Posititon(posititon.row() + 1, posititon.col() + 2))) {
             checkMateBoard[posititon.row() + 1][posititon.col() + 2] = true;
         }
@@ -359,33 +402,22 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
     /**
      * {@return whether it is checkmate}
      */
-    public boolean isCheckMate() {
-        switch (player) {
+    public boolean isCheckMate(boolean[][] checkMateBoard) {
+        switch (getNextPlayer()) {
             case PLAYER_1 -> {
-                return isWhiteKingInCheckMate();
+                return isKingInCheckMate(ChessPieces.WHITE_KING, checkMateBoard);
             }
             case PLAYER_2 -> {
-                return isBlackKingInCheckMate();
+                return isKingInCheckMate(ChessPieces.BLACK_KING, checkMateBoard);
             }
         }
         throw new ArithmeticException("No player found!");
     }
 
-    private boolean isWhiteKingInCheckMate() {
+    private boolean isKingInCheckMate(ChessPieces piece, boolean[][] checkMateBoard) {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
-                if (getPiece(row, col) == ChessPieces.WHITE_KING) {
-                    return checkMateBoard[row][col];
-                }
-            }
-        }
-        return false;
-    }
-
-    private boolean isBlackKingInCheckMate() {
-        for (var row = 0; row < BOARD_SIZE; row++) {
-            for (var col = 0; col < BOARD_SIZE; col++) {
-                if (getPiece(row, col) == ChessPieces.BLACK_KING) {
+                if (getPiece(row, col) == piece) {
                     return checkMateBoard[row][col];
                 }
             }
@@ -406,6 +438,19 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
      */
     @Override
     public boolean isGameOver() {
+        return !isPlayerCanMove();
+    }
+
+    private boolean isPlayerCanMove() {
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
+                if (isPlayerPiece(new Posititon(i, j))) {
+                    if (isLegalToMoveFrom(new Posititon(i, j))) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -428,7 +473,294 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
      */
     @Override
     public boolean isLegalToMoveFrom(Posititon from) {
-        return isOnBoard(from) && !isEmpty(from) && isPlayerPiece(from) && pieceCanMove(from);
+        return isOnBoard(from) && !isEmpty(from) && isPlayerPiece(from) && pieceCanMove(from) && isCheckMateEvasionMove(from);
+    }
+
+    private boolean isCheckMateEvasionMove(Posititon from) {
+        if (!isCheckMate(checkMateBoard)) {
+            return true;
+        }
+        return isCheckMateOver(from);
+    }
+
+    private boolean isCheckMateOver(Posititon posititon) {
+        ChessPieces piece = board[posititon.row()][posititon.col()].get();
+        switch (piece) {
+            case WHITE_KING, BLACK_KING -> {
+                return isKingMoveEndCheckMate(posititon);
+            }
+            case WHITE_QUEEN, BLACK_QUEEN -> {
+                return isQueenMoveEndCheckMate(posititon);
+            }
+            case WHITE_BISHOP, BLACK_BISHOP -> {
+                return isBishopMoveEndCheckMate(posititon);
+            }
+            case WHITE_ROOK, BLACK_ROOK -> {
+                return isRookMoveEndCheckMate(posititon);
+            }
+            case WHITE_KNIGHT, BLACK_KNIGHT -> {
+                return isKnightMoveEndCheckMate(posititon);
+            }
+            case WHITE_PAWN -> {
+                return isWhitePawnMoveEndCheckMate(posititon);
+            }
+            case BLACK_PAWN -> {
+                return isBlackPawnMoveEndCheckMate(posititon);
+            }
+        }
+        return false;
+    }
+
+    private boolean isBlackPawnMoveEndCheckMate(Posititon posititon) {
+        boolean move1 = false;
+        boolean move2;
+        boolean move3 = false;
+        boolean move4 = false;
+        if (posititon.row() == 1 && getPiece(posititon.row() + 1, posititon.col()) == ChessPieces.EMPTY && getPiece(posititon.row() + 2, posititon.col()) == ChessPieces.EMPTY) {
+           move1 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() + 2, posititon.col()));
+        }
+        move2 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() + 1, posititon.col()));
+        if (isEnemyPiece(new Posititon(posititon.row() + 1, posititon.col() + 1))) {
+            move3 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() + 1, posititon.col() + 1));
+        }
+        if (isEnemyPiece(new Posititon(posititon.row() + 1, posititon.col() - 1))) {
+            move4 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() + 1, posititon.col() - 1));
+        }
+        return move1 || move2 || move3 || move4;
+    }
+
+    private boolean isWhitePawnMoveEndCheckMate(Posititon posititon) {
+        boolean move1 = false;
+        boolean move2;
+        boolean move3 = false;
+        boolean move4 = false;
+        if (posititon.row() == 6 && getPiece(posititon.row() - 1, posititon.col()) == ChessPieces.EMPTY && getPiece(posititon.row() - 2, posititon.col()) == ChessPieces.EMPTY) {
+            move1 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() - 2, posititon.col()));
+        }
+        move2 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() - 1, posititon.col()));
+        if (isEnemyPiece(new Posititon(posititon.row() - 1, posititon.col() + 1))) {
+            move3 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() - 1, posititon.col() + 1));
+        }
+        if (isEnemyPiece(new Posititon(posititon.row() - 1, posititon.col() - 1))) {
+            move4 = MoveToEndCheckMate(posititon, new Posititon(posititon.row() - 1, posititon.col() - 1));
+        }
+        return move1 || move2 || move3 || move4;
+    }
+
+    private boolean isBishopMoveEndCheckMate(Posititon posititon) {
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row() + i, posititon.col() + i))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() + i, posititon.col() + i))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row() + j, posititon.col() + j) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() + i, posititon.col() + i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row() - i, posititon.col() - i))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() - i, posititon.col() - i))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row() - j, posititon.col() - j) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() - i, posititon.col() - i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row() + i, posititon.col() - i))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() + i, posititon.col() - i))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row() + j, posititon.col() - j) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() + i, posititon.col() - i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row() -  i, posititon.col() + i))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() - i, posititon.col() + i))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row() - j, posititon.col() + j) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() - i, posititon.col() + i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isRookMoveEndCheckMate(Posititon posititon) {
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row(), posititon.col() + i))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row(), posititon.col() + i))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row(), posititon.col() + j) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row(), posititon.col() + i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row() + i, posititon.col()))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() + i, posititon.col()))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row() + j, posititon.col()) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() + i, posititon.col()))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row(), posititon.col() - i))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row(), posititon.col() - i))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row(), posititon.col() - j) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row(), posititon.col() - i))) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        for (var i = 1; i < BOARD_SIZE; i++) {
+            if (isOnBoard(new Posititon(posititon.row() -  i, posititon.col()))) {
+                if (i == 1) {
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() - i, posititon.col()))) {
+                        return true;
+                    }
+                }
+                for (var j = 1; j < i; j++) {
+                    if (!(getPiece(posititon.row() - j, posititon.col()) == ChessPieces.EMPTY)) {
+                        break;
+                    }
+                    if (MoveToEndCheckMate(posititon, new Posititon(posititon.row() - i, posititon.col()))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isQueenMoveEndCheckMate(Posititon posititon) {
+        return isBishopMoveEndCheckMate(posititon) || isRookMoveEndCheckMate(posititon);
+    }
+
+    private boolean isKingMoveEndCheckMate(Posititon posititon) {
+        Posititon pos1 = new Posititon(posititon.row() + 1, posititon.col() + 1);
+        Posititon pos2 = new Posititon(posititon.row() + 1, posititon.col() - 1);
+        Posititon pos3 = new Posititon(posititon.row() + 1, posititon.col());
+        Posititon pos4 = new Posititon(posititon.row(), posititon.col() + 1);
+        Posititon pos5 = new Posititon(posititon.row(), posititon.col() -1);
+        Posititon pos6 = new Posititon(posititon.row() - 1, posititon.col() - 1);
+        Posititon pos7 = new Posititon(posititon.row() - 1, posititon.col() + 1);
+        Posititon pos8 = new Posititon(posititon.row() - 1, posititon.col());
+        return MoveToEndCheckMate(posititon, pos1) || MoveToEndCheckMate(posititon, pos2) ||
+                MoveToEndCheckMate(posititon, pos3) || MoveToEndCheckMate(posititon, pos4) ||
+                MoveToEndCheckMate(posititon, pos5) || MoveToEndCheckMate(posititon, pos6) ||
+                MoveToEndCheckMate(posititon, pos7) || MoveToEndCheckMate(posititon, pos8);
+    }
+
+    private boolean isKnightMoveEndCheckMate(Posititon posititon) {
+        Posititon pos1 = new Posititon(posititon.row() + 1, posititon.col() + 2);
+        Posititon pos2 = new Posititon(posititon.row() + 1, posititon.col() - 2);
+        Posititon pos3 = new Posititon(posititon.row() + 2, posititon.col() + 1);
+        Posititon pos4 = new Posititon(posititon.row() + 2, posititon.col() - 1);
+        Posititon pos5 = new Posititon(posititon.row() - 1, posititon.col() + 2);
+        Posititon pos6 = new Posititon(posititon.row() - 1, posititon.col() - 2);
+        Posititon pos7 = new Posititon(posititon.row() - 2, posititon.col() + 1);
+        Posititon pos8 = new Posititon(posititon.row() - 2, posititon.col() - 1);
+        return MoveToEndCheckMate(posititon, pos1) || MoveToEndCheckMate(posititon, pos2) ||
+                MoveToEndCheckMate(posititon, pos3) || MoveToEndCheckMate(posititon, pos4) ||
+                MoveToEndCheckMate(posititon, pos5) || MoveToEndCheckMate(posititon, pos6) ||
+                MoveToEndCheckMate(posititon, pos7) || MoveToEndCheckMate(posititon, pos8);
+    }
+
+    private boolean MoveToEndCheckMate(Posititon from, Posititon to) {
+        boolean[][] tempCheckMateBoard = copyCheckMateBoard();
+        ChessPieces[][] tempBoard = copyBoard();
+        if (isOnBoard(to) || isEnemyPiece(to) || isEmpty(to)) {
+            tempBoard[to.row()][to.col()] = (getPiece(from.row(), from.col()));
+            tempBoard[from.row()][from.col()] = (ChessPieces.EMPTY);
+            createCheckMate(tempCheckMateBoard, tempBoard, player);
+            return !isCheckMate(tempCheckMateBoard);
+        }
+        return false;
+    }
+
+    private boolean[][] copyCheckMateBoard() {
+        boolean[][] tempBoard = new boolean[BOARD_SIZE][BOARD_SIZE];
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
+                tempBoard[i][j] = checkMateBoard[i][j];
+            }
+        }
+        return tempBoard;
+    }
+
+    private ChessPieces[][] copyBoard() {
+        ChessPieces[][] tempBoard = new ChessPieces[BOARD_SIZE][BOARD_SIZE];
+        for (var i = 0; i < BOARD_SIZE; i++) {
+            for (var j = 0; j < BOARD_SIZE; j++) {
+                tempBoard[i][j] = getPiece(i,j);
+            }
+        }
+        return tempBoard;
     }
 
     private boolean isOnBoard(Posititon posititon) {
@@ -635,6 +967,6 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         board[to.row()][to.col()].set(getPiece(from.row(), from.col()));
         board[from.row()][from.col()].set(ChessPieces.EMPTY);
         player = player.opponent();
-        createCheckMate();
+        createCheckMate(checkMateBoard, board, player);
     }
 }
