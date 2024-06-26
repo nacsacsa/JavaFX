@@ -191,6 +191,9 @@ public class ChessTest {
         assertTrue(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(6, 3)));
 
         assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 1), new Posititon(1, 3)));
+        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 1), new Posititon(2, 0)));
+        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(1, 2)));
+        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(0, 2)));
         assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(1, 3)));
         assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 4), new Posititon(1, 3)));
         assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 5), new Posititon(1, 4)));
