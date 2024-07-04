@@ -1,0 +1,23 @@
+.square {
+    -fx-border-style: solid;
+}
+
+.square.black:hover, .square.white:hover {
+    -fx-background-color: #baca44;
+}
+
+.square.selected {
+    -fx-border-width: 2;
+}
+
+.square.black {
+    -fx-background-color: #769656;
+}
+
+.square.white {
+    -fx-background-color: #eeeed2;
+}
+
+.square.lastMove {
+    -fx-background-color: #baca44;
+}
