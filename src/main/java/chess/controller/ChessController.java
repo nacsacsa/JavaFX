@@ -77,6 +77,10 @@ public class ChessController {
         if (selector.isReadyToMove()) {
             selector.makeMove();
             if (model.isGameOver()) {
+                switch (model.getNextPlayer()) {
+                    case PLAYER_1 -> colorWhiteKing();
+                    case PLAYER_2 -> colorBlackKing();
+                }
                 gameOverAlertAndExit();
             }
         }
