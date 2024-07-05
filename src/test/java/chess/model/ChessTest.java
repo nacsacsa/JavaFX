@@ -50,6 +50,7 @@ public class ChessTest {
         inWinState.makeMove(new Posititon(0, 3), new Posititon(4, 7));
     }
 
+
     @Test
     public void isCheckMateTest1() {
         assertTrue(inCheckMateState.isCheckMate(inCheckMateState.checkMateBoard));
@@ -62,7 +63,7 @@ public class ChessTest {
         inGameState.makeMove(new Posititon(0, 5), new Posititon(2, 3));
         inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
         inGameState.makeMove(new Posititon(2, 3), new Posititon(5, 6));
-        assertTrue(inGameState.isCheckMate(inCheckMateState.checkMateBoard));
+        assertTrue(inGameState.isCheckMate(inGameState.checkMateBoard));
     }
     @Test
     public void isCheckMateTest3() {
@@ -70,11 +71,6 @@ public class ChessTest {
         assertTrue(inGameState.isCheckMate(inCheckMateState.checkMateBoard));
     }
 
-    @Test
-    public void isLegalMoveTest1() {
-        inGameState.makeMove(new Posititon(6,0), new Posititon(5, 0));
-        assertFalse(inGameState.isLegalMove(new Posititon(1, 3), new Posititon(2, 3)));
-    }
 
     @Test
     public void isLegalMoveTestRook1() {
@@ -108,6 +104,7 @@ public class ChessTest {
         assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(6 ,3)));
         assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(0 ,3)));
     }
+
 
     @Test
     public void isLegalMoveTestBishop1() {
@@ -161,8 +158,6 @@ public class ChessTest {
         assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(0 ,3)));
     }
 
-    //TODO király olyan helyre nem lephet ahova sakkot kapna es ez igaz minden lepesre
-    //TODO Olyan is legalis lepes ha sakk van hogy csak elebe lepunk a kiralynak valami mas babuval
 
     @Test
     public void checkMateBoardTest1() {
@@ -526,6 +521,17 @@ public class ChessTest {
         assertFalse(inCheckMateState.checkMateBoard[7][7]);
     }
     @Test
+    public void checkMateBoardTest7() {
+        inGameState.makeMove(new Posititon(4, 5), new Posititon(3, 6));
+        inGameState.makeMove(new Posititon(0, 5), new Posititon(2, 3));
+        inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
+        inGameState.makeMove(new Posititon(2, 3), new Posititon(5, 6));
+        assertTrue(inGameState.checkMateBoard[7][4]);
+        assertFalse(inGameState.checkMateBoard[7][5]);
+    }
+
+
+    @Test
     public void ChessConstructorTest() {
         for (var i = 0; i < BOARD_SIZE; i++) {
             assertEquals(ChessPiece.BLACK_PAWN, initial.getPiece(1, i));
@@ -553,6 +559,7 @@ public class ChessTest {
         assertEquals(ChessPiece.WHITE_KING, initial.getPiece(7, 4));
     }
 
+
     @Test
     public void makeMoveTest1() {
         initial.makeMove(new Posititon(6, 4), new Posititon(4, 4));
@@ -572,10 +579,9 @@ public class ChessTest {
         assertEquals(ChessPiece.BLACK_KNIGHT, inCheckMateState.getPiece(1, 3));
     }
 
-    //TODO: olyan mozgas legalis ami ha elmozgunk sakk lesz ami nem lehet fekete gyalognal megtortent lehet mashol is
-    //TODO: ha sakkot adnak akkor azt is meg kell nezni hogy az uto babu ele lehet e alni
+
     @Test
-    public void isLegalMoveTest() {
+    public void isLegalMoveTest1() {
         assertTrue(initial.isLegalMove(new Posititon(6, 3), new Posititon(4, 3)));
         assertTrue(initial.isLegalMove(new Posititon(6, 3), new Posititon(5, 3)));
         assertFalse(initial.isLegalMove(new Posititon(6, 3), new Posititon(5, 2)));
@@ -613,6 +619,32 @@ public class ChessTest {
         assertFalse(inCheckMateState.isLegalMove(new Posititon(6, 0), new Posititon(5, 0)));
     }
     @Test
+    public void isLegalMoveTest2() {
+        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
+        initial.makeMove(new Posititon(1, 4), new Posititon(2, 4));
+        initial.makeMove(new Posititon(7, 4), new Posititon(6, 4));
+        initial.makeMove(new Posititon(0, 3), new Posititon(4, 7));
+        initial.makeMove(new Posititon(6, 5), new Posititon(5, 5));
+        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
+        assertFalse(initial.isLegalMove(new Posititon(6, 4), new Posititon(7, 4)));
+        assertFalse(initial.isLegalMove(new Posititon(6, 4), new Posititon(6, 5)));
+    }
+    @Test
+    public void isLegalMoveTest3() {
+        inGameState.makeMove(new Posititon(6,0), new Posititon(5, 0));
+        assertFalse(inGameState.isLegalMove(new Posititon(1, 3), new Posititon(2, 3)));
+    }
+    @Test
+    public void isLegalMoveTest4() {
+        initial.makeMove(new Posititon(6, 4), new Posititon(4, 4));
+        initial.makeMove(new Posititon(1, 3), new Posititon(3, 3));
+        initial.makeMove(new Posititon(6, 0), new Posititon(5, 0));
+        initial.makeMove(new Posititon(0, 3), new Posititon(2, 4));
+        assertFalse(initial.isLegalMove(new Posititon(4, 4), new Posititon(3, 3)));
+    }
+
+
+    @Test
     public void getNextPlayerTest() {
         assertEquals(State.Player.PLAYER_1, initial.getNextPlayer());
         assertEquals(State.Player.PLAYER_1, inGameState.getNextPlayer());
@@ -633,6 +665,7 @@ public class ChessTest {
         inGameState.makeMove(new Posititon(2, 3), new Posititon(5, 6));
         assertFalse(inGameState.isGameOver());
     }
+
 
     @Test
     public void isLegalToMoveFromTest1() {
@@ -687,6 +720,22 @@ public class ChessTest {
         initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
         assertTrue(initial.isLegalToMoveFrom(new Posititon(1, 6)));
     }
+    @Test
+    public void isLegalToMoveFromTest3() {
+        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
+        initial.makeMove(new Posititon(1, 5), new Posititon(2, 5));
+        initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 3)));
+    }
+    @Test
+    public void isLegalToMoveFromTest4() {
+        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
+        initial.makeMove(new Posititon(1, 5), new Posititon(2, 5));
+        initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 4)));
+    }
+
+
     @Test
     public void getStatusTest() {
         assertEquals(State.Status.IN_PROGRESS, initial.getStatus());

@@ -3,11 +3,20 @@
 }
 
 .square.black:hover, .square.white:hover {
+    -fx-background-color: grey;
+}
+
+.square.black.selected, .square.white.selected {
+    -fx-border-width: 2;
     -fx-background-color: #baca44;
 }
 
-.square.selected {
-    -fx-border-width: 2;
+.square.black.checkMate, .square.white.checkMate {
+    -fx-background-color: red;
+}
+
+.square.black.lastMoveTo, .square.white.lastMoveTo {
+    -fx-background-color: #baca44;
 }
 
 .square.black {
@@ -18,6 +27,10 @@
     -fx-background-color: #eeeed2;
 }
 
-.square.lastMove {
-    -fx-background-color: #baca44;
+.square.possibleMoves, .square.black.possibleMoves, .square.white.possibleMoves, .square.lastMoveTo.possibleMoves {
+    -fx-background-color: grey;
 }
+
+
+
+
