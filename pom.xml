@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>chessFx</artifactId>
+    <artifactId>chessFX</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>
@@ -26,7 +26,7 @@
         <jacoco.version>0.8.12</jacoco.version>
         <maven.checkstyle.version>3.3.1</maven.checkstyle.version>
         <maven.surefire.version>3.2.5</maven.surefire.version>
-        <exec.mainClass>colorShift.game.Main</exec.mainClass>
+        <exec.mainClass>chess.game.Main</exec.mainClass>
     </properties>
     <dependencies>
         <dependency>

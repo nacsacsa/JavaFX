@@ -748,7 +748,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
                 if (isLegalMoveWithQueen(posititon, new Posititon(row, col))) {
-                    if (moveToEndCheckMate(posititon, new Posititon(row, col))) {
+                    if (moveToEndCheckMate(posititon, new Posititon(row, col)) && getPiece(row, col) != ChessPiece.WHITE_KING && getPiece(row, col) != ChessPiece.BLACK_KING) {
                         return true;
                     }
                 }
@@ -761,7 +761,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
                 if (isLegalMoveWithBlackPawn(posititon, new Posititon(row, col))) {
-                    if (moveToEndCheckMate(posititon, new Posititon(row, col))) {
+                    if (moveToEndCheckMate(posititon, new Posititon(row, col)) && getPiece(row, col) != ChessPiece.WHITE_KING && getPiece(row, col) != ChessPiece.BLACK_KING) {
                         return true;
                     }
                 }
@@ -774,7 +774,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
                 if (isLegalMoveWithWhitePawn(posititon, new Posititon(row, col))) {
-                    if (moveToEndCheckMate(posititon, new Posititon(row, col))) {
+                    if (moveToEndCheckMate(posititon, new Posititon(row, col)) && getPiece(row, col) != ChessPiece.WHITE_KING && getPiece(row, col) != ChessPiece.BLACK_KING) {
                         return true;
                     }
                 }
@@ -787,7 +787,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
                 if (isLegalMoveWithKnight(posititon, new Posititon(row, col))) {
-                    if (moveToEndCheckMate(posititon, new Posititon(row, col))) {
+                    if (moveToEndCheckMate(posititon, new Posititon(row, col)) && getPiece(row, col) != ChessPiece.WHITE_KING && getPiece(row, col) != ChessPiece.BLACK_KING ) {
                         return true;
                     }
                 }
@@ -800,7 +800,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
                 if (isLegalMoveWithRook(posititon, new Posititon(row, col))) {
-                    if (moveToEndCheckMate(posititon, new Posititon(row, col))) {
+                    if (moveToEndCheckMate(posititon, new Posititon(row, col)) && getPiece(row, col) != ChessPiece.WHITE_KING && getPiece(row, col) != ChessPiece.BLACK_KING) {
                         return true;
                     }
                 }
@@ -813,7 +813,7 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
         for (var row = 0; row < BOARD_SIZE; row++) {
             for (var col = 0; col < BOARD_SIZE; col++) {
                 if (isLegalMoveWithBishop(posititon, new Posititon(row, col))) {
-                    if (moveToEndCheckMate(posititon, new Posititon(row, col))) {
+                    if (moveToEndCheckMate(posititon, new Posititon(row, col)) && getPiece(row, col) != ChessPiece.WHITE_KING && getPiece(row, col) != ChessPiece.BLACK_KING) {
                         return true;
                     }
                 }
@@ -1496,16 +1496,16 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
     }
 
     private boolean isLegalMoveWithBlackPawn(Posititon from, Posititon to) {
-        return (from.row() == to.row() - 1 && from.col() == to.col())
-        || (from.row() == to.row() - 2 && from.col() == to.col() && from.row() == 1 && isEmpty(new Posititon(to.row() - 1, to.col()))
+        return (from.row() == to.row() - 1 && from.col() == to.col() && isEmpty(to))
+        || (from.row() == to.row() - 2 && from.col() == to.col() && from.row() == 1 && isEmpty(new Posititon(to.row() - 1, to.col())) && isEmpty(to))
         || (from.row() == to.row() - 1 && from.col() == to.col() - 1 && isEnemyPiece(to))
-        || (from.row() == to.row() - 1 && from.col() == to.col() + 1) && isEnemyPiece(to));
+        || (from.row() == to.row() - 1 && from.col() == to.col() + 1 && isEnemyPiece(to));
 
     }
 
     private boolean isLegalMoveWithWhitePawn(Posititon from, Posititon to) {
-        return (from.row() == to.row() + 1 && from.col() == to.col())
-                || (from.row() == to.row() + 2 && from.col() == to.col() && from.row() == 6 && isEmpty(new Posititon(to.row() + 1, to.col())))
+        return (from.row() == to.row() + 1 && from.col() == to.col() && isEmpty(to))
+                || (from.row() == to.row() + 2 && from.col() == to.col() && from.row() == 6 && isEmpty(new Posititon(to.row() + 1, to.col())) && isEmpty(to))
                 || (from.row() == to.row() + 1 && from.col() == to.col() - 1 && isEnemyPiece(to))
                 || (from.row() == to.row() + 1 && from.col() == to.col() + 1 && isEnemyPiece(to));
     }

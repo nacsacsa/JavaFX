@@ -50,7 +50,6 @@ public class ChessTest {
         inWinState.makeMove(new Posititon(0, 3), new Posititon(4, 7));
     }
 
-
     @Test
     public void isCheckMateTest1() {
         assertTrue(inCheckMateState.isCheckMate(inCheckMateState.checkMateBoard));
@@ -651,6 +650,8 @@ public class ChessTest {
         assertEquals(State.Player.PLAYER_2, inCheckMateState.getNextPlayer());
         assertEquals(State.Player.PLAYER_1, inWinState.getNextPlayer());
     }
+
+
     @Test
     public void isGameOverTest1() {
         assertTrue(inWinState.isGameOver());
@@ -734,7 +735,14 @@ public class ChessTest {
         initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
         assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 4)));
     }
-
+    @Test
+    public void isLegalToMoveFromTest5() {
+        initial.makeMove(new Posititon(7, 6), new Posititon(5, 5));
+        initial.makeMove(new Posititon(0, 3), new Posititon(3, 4));
+        initial.makeMove(new Posititon(6, 4), new Posititon(4, 4));
+        initial.makeMove(new Posititon(3, 4), new Posititon(4, 4));
+        assertFalse(initial.isLegalToMoveFrom(new Posititon(5, 5)));
+    }
 
     @Test
     public void getStatusTest() {
