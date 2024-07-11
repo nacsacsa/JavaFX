@@ -1519,7 +1519,15 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
      */
     @Override
     public void makeMove(Posititon from, Posititon to) {
-        board[to.row()][to.col()].set(getPiece(from.row(), from.col()));
+        if  (getPiece(from.row(), from.col()) == ChessPiece.WHITE_PAWN && to.row() == 0) {
+            board[to.row()][to.col()].set(ChessPiece.WHITE_QUEEN);
+        }
+        else if (getPiece(from.row(), from.col()) == ChessPiece.BLACK_PAWN && to.row() == 7) {
+            board[to.row()][to.col()].set(ChessPiece.BLACK_QUEEN);
+        }
+        else {
+            board[to.row()][to.col()].set(getPiece(from.row(), from.col()));
+        }
         board[from.row()][from.col()].set(ChessPiece.EMPTY);
         player = player.opponent();
         createCheckMate(checkMateBoard, board, player);
