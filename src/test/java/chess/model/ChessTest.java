@@ -19,35 +19,35 @@ public class ChessTest {
         initial = new Chess();
 
         inGameState = new Chess();
-        inGameState.makeMove(new Posititon(6, 5), new Posititon(4, 5));
-        inGameState.makeMove(new Posititon(1, 4), new Posititon(2, 4));
-        inGameState.makeMove(new Posititon(6, 2), new Posititon(4, 2));
-        inGameState.makeMove(new Posititon(1, 2), new Posititon(3, 2));
-        inGameState.makeMove(new Posititon(7, 3), new Posititon(4, 0));
-        inGameState.makeMove(new Posititon(1, 1), new Posititon(2, 1));
-        inGameState.makeMove(new Posititon(6, 3), new Posititon(4, 3));
-        inGameState.makeMove(new Posititon(1, 6), new Posititon(3, 6));
-        inGameState.makeMove(new Posititon(7, 2), new Posititon(5, 4));
-        inGameState.makeMove(new Posititon(0, 2), new Posititon(1, 1));
+        inGameState.makeMove(new Position(6, 5), new Position(4, 5));
+        inGameState.makeMove(new Position(1, 4), new Position(2, 4));
+        inGameState.makeMove(new Position(6, 2), new Position(4, 2));
+        inGameState.makeMove(new Position(1, 2), new Position(3, 2));
+        inGameState.makeMove(new Position(7, 3), new Position(4, 0));
+        inGameState.makeMove(new Position(1, 1), new Position(2, 1));
+        inGameState.makeMove(new Position(6, 3), new Position(4, 3));
+        inGameState.makeMove(new Position(1, 6), new Position(3, 6));
+        inGameState.makeMove(new Position(7, 2), new Position(5, 4));
+        inGameState.makeMove(new Position(0, 2), new Position(1, 1));
 
         inCheckMateState = new Chess();
-        inCheckMateState.makeMove(new Posititon(6, 5), new Posititon(4, 5));
-        inCheckMateState.makeMove(new Posititon(1, 4), new Posititon(2, 4));
-        inCheckMateState.makeMove(new Posititon(6, 2), new Posititon(4, 2));
-        inCheckMateState.makeMove(new Posititon(1, 2), new Posititon(3, 2));
-        inCheckMateState.makeMove(new Posititon(7, 3), new Posititon(4, 0));
-        inCheckMateState.makeMove(new Posititon(1, 1), new Posititon(2, 1));
-        inCheckMateState.makeMove(new Posititon(6, 3), new Posititon(5, 3));
-        inCheckMateState.makeMove(new Posititon(1, 6), new Posititon(3, 6));
-        inCheckMateState.makeMove(new Posititon(7, 2), new Posititon(5, 4));
-        inCheckMateState.makeMove(new Posititon(0, 2), new Posititon(1, 1));
-        inCheckMateState.makeMove(new Posititon(4, 0), new Posititon(1, 3));
+        inCheckMateState.makeMove(new Position(6, 5), new Position(4, 5));
+        inCheckMateState.makeMove(new Position(1, 4), new Position(2, 4));
+        inCheckMateState.makeMove(new Position(6, 2), new Position(4, 2));
+        inCheckMateState.makeMove(new Position(1, 2), new Position(3, 2));
+        inCheckMateState.makeMove(new Position(7, 3), new Position(4, 0));
+        inCheckMateState.makeMove(new Position(1, 1), new Position(2, 1));
+        inCheckMateState.makeMove(new Position(6, 3), new Position(5, 3));
+        inCheckMateState.makeMove(new Position(1, 6), new Position(3, 6));
+        inCheckMateState.makeMove(new Position(7, 2), new Position(5, 4));
+        inCheckMateState.makeMove(new Position(0, 2), new Position(1, 1));
+        inCheckMateState.makeMove(new Position(4, 0), new Position(1, 3));
 
         inWinState = new Chess();
-        inWinState.makeMove(new Posititon(6, 5), new Posititon(5, 5));
-        inWinState.makeMove(new Posititon(1, 4), new Posititon(3, 4));
-        inWinState.makeMove(new Posititon(6, 6), new Posititon(4, 6));
-        inWinState.makeMove(new Posititon(0, 3), new Posititon(4, 7));
+        inWinState.makeMove(new Position(6, 5), new Position(5, 5));
+        inWinState.makeMove(new Position(1, 4), new Position(3, 4));
+        inWinState.makeMove(new Position(6, 6), new Position(4, 6));
+        inWinState.makeMove(new Position(0, 3), new Position(4, 7));
     }
 
     @Test
@@ -58,103 +58,103 @@ public class ChessTest {
     }
     @Test
     public void isCheckMateTest2() {
-        inGameState.makeMove(new Posititon(4, 5), new Posititon(3, 6));
-        inGameState.makeMove(new Posititon(0, 5), new Posititon(2, 3));
-        inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
-        inGameState.makeMove(new Posititon(2, 3), new Posititon(5, 6));
+        inGameState.makeMove(new Position(4, 5), new Position(3, 6));
+        inGameState.makeMove(new Position(0, 5), new Position(2, 3));
+        inGameState.makeMove(new Position(4, 3), new Position(3, 2));
+        inGameState.makeMove(new Position(2, 3), new Position(5, 6));
         assertTrue(inGameState.isCheckMate(inGameState.checkMateBoard));
     }
     @Test
     public void isCheckMateTest3() {
-        inGameState.makeMove(new Posititon(4, 0), new Posititon(1, 3));
+        inGameState.makeMove(new Position(4, 0), new Position(1, 3));
         assertTrue(inGameState.isCheckMate(inCheckMateState.checkMateBoard));
     }
 
 
     @Test
     public void isLegalMoveTestRook1() {
-        initial.makeMove(new Posititon(7, 0), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(5 ,3)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(3 ,3)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(2 ,3)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(1 ,3)));
+        initial.makeMove(new Position(7, 0), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(5 ,3)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(3 ,3)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(2 ,3)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(1 ,3)));
     }
     @Test
     public void isLegalMoveTestRook2() {
-        initial.makeMove(new Posititon(7, 0), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,2)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,1)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,0)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,4)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,5)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,6)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,7)));
+        initial.makeMove(new Position(7, 0), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,2)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,1)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,0)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,4)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,5)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,6)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(4 ,7)));
     }
     @Test
     public void isLegalMoveTestRook3() {
-        initial.makeMove(new Posititon(7, 0), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(5 ,4)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(6 ,5)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(7 ,6)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(7 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(6 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(0 ,3)));
+        initial.makeMove(new Position(7, 0), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(5 ,4)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(6 ,5)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(7 ,6)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(7 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(6 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(0 ,3)));
     }
 
 
     @Test
     public void isLegalMoveTestBishop1() {
-        initial.makeMove(new Posititon(7, 2), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(5 ,4)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(6 ,5)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(7 ,6)));
+        initial.makeMove(new Position(7, 2), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(5 ,4)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(6 ,5)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(7 ,6)));
     }
     @Test
     public void isLegalMoveTestBishop2() {
-        initial.makeMove(new Posititon(7, 2), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(3 ,2)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(2 ,1)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(1 ,0)));
+        initial.makeMove(new Position(7, 2), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(3 ,2)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(2 ,1)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(1 ,0)));
     }
     @Test
     public void isLegalMoveTestBishop3() {
-        initial.makeMove(new Posititon(7, 2), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(5 ,2)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(6 ,1)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(7 ,0)));
+        initial.makeMove(new Position(7, 2), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(5 ,2)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(6 ,1)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(7 ,0)));
     }
     @Test
     public void isLegalMoveTestBishop4() {
-        initial.makeMove(new Posititon(7, 2), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(3 ,4)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(2 ,5)));
-        assertTrue(initial.isLegalMove(new Posititon(4, 3), new Posititon(1 ,6)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(0 ,7)));
+        initial.makeMove(new Position(7, 2), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(3 ,4)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(2 ,5)));
+        assertTrue(initial.isLegalMove(new Position(4, 3), new Position(1 ,6)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(0 ,7)));
     }
     @Test
     public void isLegalMoveTestBishop5() {
-        initial.makeMove(new Posititon(7, 2), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(5 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(6 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(7 ,3)));
+        initial.makeMove(new Position(7, 2), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(5 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(6 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(7 ,3)));
     }
     @Test
     public void isLegalMoveTestBishop6() {
-        initial.makeMove(new Posititon(7, 2), new Posititon(4, 3));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(4 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(3 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(2 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(1 ,3)));
-        assertFalse(initial.isLegalMove(new Posititon(4, 3), new Posititon(0 ,3)));
+        initial.makeMove(new Position(7, 2), new Position(4, 3));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(4 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(3 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(2 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(1 ,3)));
+        assertFalse(initial.isLegalMove(new Position(4, 3), new Position(0 ,3)));
     }
 
 
@@ -176,7 +176,7 @@ public class ChessTest {
     }
     @Test
     public void checkMateBoardTest2() {
-        initial.makeMove(new Posititon(6, 3), new Posititon(5, 3));
+        initial.makeMove(new Position(6, 3), new Position(5, 3));
         assertFalse(initial.checkMateBoard[2][0]);
         assertFalse(initial.checkMateBoard[2][1]);
         assertFalse(initial.checkMateBoard[2][2]);
@@ -296,7 +296,7 @@ public class ChessTest {
     }
     @Test
     public void checkMateBoardTest4() {
-        inGameState.makeMove(new Posititon(6, 7), new Posititon(4, 7));
+        inGameState.makeMove(new Position(6, 7), new Position(4, 7));
         assertFalse(inGameState.checkMateBoard[0][0]);
         assertFalse(inGameState.checkMateBoard[0][1]);
         assertFalse(inGameState.checkMateBoard[0][2]);
@@ -371,7 +371,7 @@ public class ChessTest {
     }
     @Test
     public void checkMateBoardTest5() {
-        inCheckMateState.makeMove(new Posititon(0, 5), new Posititon(4, 1));
+        inCheckMateState.makeMove(new Position(0, 5), new Position(4, 1));
 
         assertTrue(inCheckMateState.checkMateBoard[0][0]);
         assertTrue(inCheckMateState.checkMateBoard[0][1]);
@@ -521,10 +521,10 @@ public class ChessTest {
     }
     @Test
     public void checkMateBoardTest7() {
-        inGameState.makeMove(new Posititon(4, 5), new Posititon(3, 6));
-        inGameState.makeMove(new Posititon(0, 5), new Posititon(2, 3));
-        inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
-        inGameState.makeMove(new Posititon(2, 3), new Posititon(5, 6));
+        inGameState.makeMove(new Position(4, 5), new Position(3, 6));
+        inGameState.makeMove(new Position(0, 5), new Position(2, 3));
+        inGameState.makeMove(new Position(4, 3), new Position(3, 2));
+        inGameState.makeMove(new Position(2, 3), new Position(5, 6));
         assertTrue(inGameState.checkMateBoard[7][4]);
         assertFalse(inGameState.checkMateBoard[7][5]);
     }
@@ -561,19 +561,19 @@ public class ChessTest {
 
     @Test
     public void makeMoveTest1() {
-        initial.makeMove(new Posititon(6, 4), new Posititon(4, 4));
+        initial.makeMove(new Position(6, 4), new Position(4, 4));
         assertEquals(ChessPiece.EMPTY, initial.getPiece(6, 4));
         assertEquals(ChessPiece.WHITE_PAWN, initial.getPiece(4, 4));
     }
     @Test
     public void makeMoveTest2() {
-        inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
+        inGameState.makeMove(new Position(4, 3), new Position(3, 2));
         assertEquals(ChessPiece.EMPTY, inGameState.getPiece(4, 3));
         assertEquals(ChessPiece.WHITE_PAWN, inGameState.getPiece(3, 2));
     }
     @Test
     public void makeMoveTest() {
-        inCheckMateState.makeMove(new Posititon(0, 1), new Posititon(1, 3));
+        inCheckMateState.makeMove(new Position(0, 1), new Position(1, 3));
         assertEquals(ChessPiece.EMPTY, inCheckMateState.getPiece(0, 1));
         assertEquals(ChessPiece.BLACK_KNIGHT, inCheckMateState.getPiece(1, 3));
     }
@@ -581,65 +581,65 @@ public class ChessTest {
 
     @Test
     public void isLegalMoveTest1() {
-        assertTrue(initial.isLegalMove(new Posititon(6, 3), new Posititon(4, 3)));
-        assertTrue(initial.isLegalMove(new Posititon(6, 3), new Posititon(5, 3)));
-        assertFalse(initial.isLegalMove(new Posititon(6, 3), new Posititon(5, 2)));
-        assertFalse(initial.isLegalMove(new Posititon(6, 3), new Posititon(3, 3)));
-        assertTrue(initial.isLegalMove(new Posititon(7, 1), new Posititon(5, 0)));
-        assertTrue(initial.isLegalMove(new Posititon(7, 1), new Posititon(5, 2)));
-        assertFalse(initial.isLegalMove(new Posititon(7, 0), new Posititon(3, 0)));
-        assertFalse(initial.isLegalMove(new Posititon(7, 2), new Posititon(6, 1)));
-        assertFalse(initial.isLegalMove(new Posititon(1, 4), new Posititon(2, 4)));
-        assertFalse(initial.isLegalMove(new Posititon(8, 8), new Posititon(3, 3)));
-        assertFalse(initial.isLegalMove(new Posititon(8, 0), new Posititon(9, 9)));
-        assertFalse(initial.isLegalMove(new Posititon(-1, -1), new Posititon(-2, -2)));
-        assertFalse(initial.isLegalMove(new Posititon(-4, -4), new Posititon(4, 3)));
+        assertTrue(initial.isLegalMove(new Position(6, 3), new Position(4, 3)));
+        assertTrue(initial.isLegalMove(new Position(6, 3), new Position(5, 3)));
+        assertFalse(initial.isLegalMove(new Position(6, 3), new Position(5, 2)));
+        assertFalse(initial.isLegalMove(new Position(6, 3), new Position(3, 3)));
+        assertTrue(initial.isLegalMove(new Position(7, 1), new Position(5, 0)));
+        assertTrue(initial.isLegalMove(new Position(7, 1), new Position(5, 2)));
+        assertFalse(initial.isLegalMove(new Position(7, 0), new Position(3, 0)));
+        assertFalse(initial.isLegalMove(new Position(7, 2), new Position(6, 1)));
+        assertFalse(initial.isLegalMove(new Position(1, 4), new Position(2, 4)));
+        assertFalse(initial.isLegalMove(new Position(8, 8), new Position(3, 3)));
+        assertFalse(initial.isLegalMove(new Position(8, 0), new Position(9, 9)));
+        assertFalse(initial.isLegalMove(new Position(-1, -1), new Position(-2, -2)));
+        assertFalse(initial.isLegalMove(new Position(-4, -4), new Position(4, 3)));
 
-        assertTrue(inGameState.isLegalMove(new Posititon(4, 3), new Posititon(3, 2)));
-        assertFalse(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(4, 5)));
-        assertFalse(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(3, 6)));
-        assertFalse(inGameState.isLegalMove(new Posititon(4, 2), new Posititon(3, 2)));
-        assertTrue(inGameState.isLegalMove(new Posititon(4, 0), new Posititon(2, 2)));
-        assertTrue(inGameState.isLegalMove(new Posititon(4, 0), new Posititon(1, 3)));
-        assertFalse(inGameState.isLegalMove(new Posititon(0, 2), new Posititon(0, 1)));
-        assertFalse(inGameState.isLegalMove(new Posititon(1, 1), new Posititon(6, 6)));
-        assertFalse(inGameState.isLegalMove(new Posititon(4, 2), new Posititon(5, 2)));
-        assertTrue(inGameState.isLegalMove(new Posititon(7, 1), new Posititon(6, 3)));
-        assertTrue(inGameState.isLegalMove(new Posititon(5, 4), new Posititon(6, 3)));
+        assertTrue(inGameState.isLegalMove(new Position(4, 3), new Position(3, 2)));
+        assertFalse(inGameState.isLegalMove(new Position(5, 4), new Position(4, 5)));
+        assertFalse(inGameState.isLegalMove(new Position(5, 4), new Position(3, 6)));
+        assertFalse(inGameState.isLegalMove(new Position(4, 2), new Position(3, 2)));
+        assertTrue(inGameState.isLegalMove(new Position(4, 0), new Position(2, 2)));
+        assertTrue(inGameState.isLegalMove(new Position(4, 0), new Position(1, 3)));
+        assertFalse(inGameState.isLegalMove(new Position(0, 2), new Position(0, 1)));
+        assertFalse(inGameState.isLegalMove(new Position(1, 1), new Position(6, 6)));
+        assertFalse(inGameState.isLegalMove(new Position(4, 2), new Position(5, 2)));
+        assertTrue(inGameState.isLegalMove(new Position(7, 1), new Position(6, 3)));
+        assertTrue(inGameState.isLegalMove(new Position(5, 4), new Position(6, 3)));
 
-        assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 1), new Posititon(1, 3)));
-        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 1), new Posititon(2, 0)));
-        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(1, 2)));
-        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(0, 2)));
-        assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 3), new Posititon(1, 3)));
-        assertTrue(inCheckMateState.isLegalMove(new Posititon(0, 4), new Posititon(1, 3)));
-        assertFalse(inCheckMateState.isLegalMove(new Posititon(0, 5), new Posititon(1, 4)));
-        assertFalse(inCheckMateState.isLegalMove(new Posititon(3, 2), new Posititon(2, 2)));
-        assertFalse(inCheckMateState.isLegalMove(new Posititon(6, 0), new Posititon(5, 0)));
+        assertTrue(inCheckMateState.isLegalMove(new Position(0, 1), new Position(1, 3)));
+        assertFalse(inCheckMateState.isLegalMove(new Position(0, 1), new Position(2, 0)));
+        assertFalse(inCheckMateState.isLegalMove(new Position(0, 3), new Position(1, 2)));
+        assertFalse(inCheckMateState.isLegalMove(new Position(0, 3), new Position(0, 2)));
+        assertTrue(inCheckMateState.isLegalMove(new Position(0, 3), new Position(1, 3)));
+        assertTrue(inCheckMateState.isLegalMove(new Position(0, 4), new Position(1, 3)));
+        assertFalse(inCheckMateState.isLegalMove(new Position(0, 5), new Position(1, 4)));
+        assertFalse(inCheckMateState.isLegalMove(new Position(3, 2), new Position(2, 2)));
+        assertFalse(inCheckMateState.isLegalMove(new Position(6, 0), new Position(5, 0)));
     }
     @Test
     public void isLegalMoveTest2() {
-        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
-        initial.makeMove(new Posititon(1, 4), new Posititon(2, 4));
-        initial.makeMove(new Posititon(7, 4), new Posititon(6, 4));
-        initial.makeMove(new Posititon(0, 3), new Posititon(4, 7));
-        initial.makeMove(new Posititon(6, 5), new Posititon(5, 5));
-        initial.makeMove(new Posititon(1, 0), new Posititon(2, 0));
-        assertFalse(initial.isLegalMove(new Posititon(6, 4), new Posititon(7, 4)));
-        assertFalse(initial.isLegalMove(new Posititon(6, 4), new Posititon(6, 5)));
+        initial.makeMove(new Position(6, 4), new Position(5, 4));
+        initial.makeMove(new Position(1, 4), new Position(2, 4));
+        initial.makeMove(new Position(7, 4), new Position(6, 4));
+        initial.makeMove(new Position(0, 3), new Position(4, 7));
+        initial.makeMove(new Position(6, 5), new Position(5, 5));
+        initial.makeMove(new Position(1, 0), new Position(2, 0));
+        assertFalse(initial.isLegalMove(new Position(6, 4), new Position(7, 4)));
+        assertFalse(initial.isLegalMove(new Position(6, 4), new Position(6, 5)));
     }
     @Test
     public void isLegalMoveTest3() {
-        inGameState.makeMove(new Posititon(6,0), new Posititon(5, 0));
-        assertFalse(inGameState.isLegalMove(new Posititon(1, 3), new Posititon(2, 3)));
+        inGameState.makeMove(new Position(6,0), new Position(5, 0));
+        assertFalse(inGameState.isLegalMove(new Position(1, 3), new Position(2, 3)));
     }
     @Test
     public void isLegalMoveTest4() {
-        initial.makeMove(new Posititon(6, 4), new Posititon(4, 4));
-        initial.makeMove(new Posititon(1, 3), new Posititon(3, 3));
-        initial.makeMove(new Posititon(6, 0), new Posititon(5, 0));
-        initial.makeMove(new Posititon(0, 3), new Posititon(2, 4));
-        assertFalse(initial.isLegalMove(new Posititon(4, 4), new Posititon(3, 3)));
+        initial.makeMove(new Position(6, 4), new Position(4, 4));
+        initial.makeMove(new Position(1, 3), new Position(3, 3));
+        initial.makeMove(new Position(6, 0), new Position(5, 0));
+        initial.makeMove(new Position(0, 3), new Position(2, 4));
+        assertFalse(initial.isLegalMove(new Position(4, 4), new Position(3, 3)));
     }
 
 
@@ -660,88 +660,88 @@ public class ChessTest {
     }
     @Test
     public void isGameOverTest2() {
-        inGameState.makeMove(new Posititon(4, 5), new Posititon(3, 6));
-        inGameState.makeMove(new Posititon(0, 5), new Posititon(2, 3));
-        inGameState.makeMove(new Posititon(4, 3), new Posititon(3, 2));
-        inGameState.makeMove(new Posititon(2, 3), new Posititon(5, 6));
+        inGameState.makeMove(new Position(4, 5), new Position(3, 6));
+        inGameState.makeMove(new Position(0, 5), new Position(2, 3));
+        inGameState.makeMove(new Position(4, 3), new Position(3, 2));
+        inGameState.makeMove(new Position(2, 3), new Position(5, 6));
         assertFalse(inGameState.isGameOver());
     }
 
 
     @Test
     public void isLegalToMoveFromTest1() {
-        assertTrue(initial.isLegalToMoveFrom(new Posititon(6, 3)));
-        assertTrue(initial.isLegalToMoveFrom(new Posititon(7, 1)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 0)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 3)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 2)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(7, 4)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 0)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 1)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 2)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 3)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 4)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(1, 0)));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(1, 4)));
+        assertTrue(initial.isLegalToMoveFrom(new Position(6, 3)));
+        assertTrue(initial.isLegalToMoveFrom(new Position(7, 1)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(7, 0)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(7, 3)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(7, 2)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(7, 4)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 0)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 1)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 2)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 3)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 4)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(1, 0)));
+        assertFalse(initial.isLegalToMoveFrom(new Position(1, 4)));
 
-        assertTrue(inGameState.isLegalToMoveFrom(new Posititon(4, 0)));
-        assertTrue(inGameState.isLegalToMoveFrom(new Posititon(4, 3)));
-        assertTrue(inGameState.isLegalToMoveFrom(new Posititon(5, 4)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(4, 2)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(7, 0)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(7, 5)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 0)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 1)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 2)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(0, 3)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(3, 2)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(8, 3)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(3, 8)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(8, 8)));
-        assertFalse(inGameState.isLegalToMoveFrom(new Posititon(-1, -1)));
+        assertTrue(inGameState.isLegalToMoveFrom(new Position(4, 0)));
+        assertTrue(inGameState.isLegalToMoveFrom(new Position(4, 3)));
+        assertTrue(inGameState.isLegalToMoveFrom(new Position(5, 4)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(4, 2)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(7, 0)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(7, 5)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(0, 0)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(0, 1)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(0, 2)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(0, 3)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(3, 2)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(8, 3)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(3, 8)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(8, 8)));
+        assertFalse(inGameState.isLegalToMoveFrom(new Position(-1, -1)));
 
         assertEquals(ChessPiece.WHITE_QUEEN, inCheckMateState.getPiece(1, 3));
-        assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 1)));
+        assertTrue(inCheckMateState.isLegalToMoveFrom(new Position(0, 1)));
         assertEquals(ChessPiece.WHITE_QUEEN, inCheckMateState.getPiece(1, 3));
         assertTrue(inCheckMateState.isCheckMate(inCheckMateState.checkMateBoard));
-        assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 3)));
-        assertTrue(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 4)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 0)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(1, 1)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(0, 5)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(2, 4)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(1, 3)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(4, 2)));
-        assertFalse(inCheckMateState.isLegalToMoveFrom(new Posititon(7, 1)));
+        assertTrue(inCheckMateState.isLegalToMoveFrom(new Position(0, 3)));
+        assertTrue(inCheckMateState.isLegalToMoveFrom(new Position(0, 4)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(0, 0)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(1, 1)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(0, 5)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(2, 4)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(1, 3)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(4, 2)));
+        assertFalse(inCheckMateState.isLegalToMoveFrom(new Position(7, 1)));
     }
     @Test
     public void isLegalToMoveFromTest2() {
-        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
-        initial.makeMove(new Posititon(1, 5), new Posititon(2, 5));
-        initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
-        assertTrue(initial.isLegalToMoveFrom(new Posititon(1, 6)));
+        initial.makeMove(new Position(6, 4), new Position(5, 4));
+        initial.makeMove(new Position(1, 5), new Position(2, 5));
+        initial.makeMove(new Position(7, 3), new Position(3, 7));
+        assertTrue(initial.isLegalToMoveFrom(new Position(1, 6)));
     }
     @Test
     public void isLegalToMoveFromTest3() {
-        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
-        initial.makeMove(new Posititon(1, 5), new Posititon(2, 5));
-        initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 3)));
+        initial.makeMove(new Position(6, 4), new Position(5, 4));
+        initial.makeMove(new Position(1, 5), new Position(2, 5));
+        initial.makeMove(new Position(7, 3), new Position(3, 7));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 3)));
     }
     @Test
     public void isLegalToMoveFromTest4() {
-        initial.makeMove(new Posititon(6, 4), new Posititon(5, 4));
-        initial.makeMove(new Posititon(1, 5), new Posititon(2, 5));
-        initial.makeMove(new Posititon(7, 3), new Posititon(3, 7));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(0, 4)));
+        initial.makeMove(new Position(6, 4), new Position(5, 4));
+        initial.makeMove(new Position(1, 5), new Position(2, 5));
+        initial.makeMove(new Position(7, 3), new Position(3, 7));
+        assertFalse(initial.isLegalToMoveFrom(new Position(0, 4)));
     }
     @Test
     public void isLegalToMoveFromTest5() {
-        initial.makeMove(new Posititon(7, 6), new Posititon(5, 5));
-        initial.makeMove(new Posititon(0, 3), new Posititon(3, 4));
-        initial.makeMove(new Posititon(6, 4), new Posititon(4, 4));
-        initial.makeMove(new Posititon(3, 4), new Posititon(4, 4));
-        assertFalse(initial.isLegalToMoveFrom(new Posititon(5, 5)));
+        initial.makeMove(new Position(7, 6), new Position(5, 5));
+        initial.makeMove(new Position(0, 3), new Position(3, 4));
+        initial.makeMove(new Position(6, 4), new Position(4, 4));
+        initial.makeMove(new Position(3, 4), new Position(4, 4));
+        assertFalse(initial.isLegalToMoveFrom(new Position(5, 5)));
     }
 
     @Test
