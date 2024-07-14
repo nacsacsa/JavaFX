@@ -1200,11 +1200,11 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
 
     private boolean whiteEnemyTemp(Posititon posititon) {
         return getTempPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_PAWN
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_ROOK
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_KNIGHT
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_BISHOP
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_QUEEN
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_KING;
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_ROOK
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_KNIGHT
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_BISHOP
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_QUEEN
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.WHITE_KING;
     }
 
     private boolean blackEnemy(Posititon posititon) {
@@ -1218,11 +1218,11 @@ public class Chess implements TwoPhaseMoveState<Posititon> {
 
     private boolean blackEnemyTemp(Posititon posititon) {
         return getTempPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_PAWN
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_ROOK
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_KNIGHT
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_BISHOP
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_QUEEN
-                || getPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_KING;
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_ROOK
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_KNIGHT
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_BISHOP
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_QUEEN
+                || getTempPiece(posititon.row(), posititon.col()) == ChessPiece.BLACK_KING;
     }
 
     private boolean whitePieceCanMove(Posititon posititon) {
