@@ -2,7 +2,7 @@ package chess.controller;
 
 import chess.model.Chess;
 import chess.model.ChessPiece;
-import chess.model.Posititon;
+import chess.model.Position;
 import chess.model.utils.EnumImageStorage;
 import chess.model.utils.ImageStorage;
 import chess.model.utils.TwoPhaseMoveSelector;
@@ -22,7 +22,7 @@ public class ChessController {
     @FXML
     private GridPane board;
     private final Chess model = new Chess();
-    private final TwoPhaseMoveSelector<Posititon> selector = new TwoPhaseMoveSelector<>(model);
+    private final TwoPhaseMoveSelector<Position> selector = new TwoPhaseMoveSelector<>(model);
     private final ImageStorage<ChessPiece> imageStorage = new EnumImageStorage<>(ChessPiece.class);
     @FXML
     private void initialize() {
@@ -74,7 +74,7 @@ public class ChessController {
         var square = (StackPane) event.getSource();
         var row = GridPane.getRowIndex(square);
         var col = GridPane.getColumnIndex(square);
-        selector.select(new Posititon(row, col));
+        selector.select(new Position(row, col));
         if (selector.isReadyToMove()) {
             selector.makeMove();
             if (model.isGameOver()) {
@@ -99,7 +99,7 @@ public class ChessController {
     private void noCheckMateColor() {
         for (var i = 0; i < board.getRowCount(); i++) {
             for (var j = 0; j < board.getColumnCount(); j++) {
-                    var square = getSquare(new Posititon(i, j));
+                    var square = getSquare(new Position(i, j));
                     square.getStyleClass().remove("checkMate");
                 }
             }
@@ -121,35 +121,35 @@ public class ChessController {
         }
     }
 
-    private void showSelection(Posititon position) {
+    private void showSelection(Position position) {
         var square = getSquare(position);
         square.getStyleClass().add("selected");
         showWhereIsPossibleToMove(position);
     }
 
-    private void showWhereIsPossibleToMove(Posititon posititon) {
+    private void showWhereIsPossibleToMove(Position position) {
         for (var i = 0; i < board.getRowCount(); i++) {
             for (var j = 0; j < board.getColumnCount(); j++) {
-                if (model.isLegalMove(posititon, new Posititon(i, j))) {
-                    var square = getSquare(new Posititon(i, j));
+                if (model.isLegalMove(position, new Position(i, j))) {
+                    var square = getSquare(new Position(i, j));
                     square.getStyleClass().add("possibleMoves");
                 }
             }
         }
     }
 
-    private void notShowWhereIsPossibleToMove(Posititon posititon) {
+    private void notShowWhereIsPossibleToMove(Position position) {
         for (var i = 0; i < board.getRowCount(); i++) {
             for (var j = 0; j < board.getColumnCount(); j++) {
-                if (model.isLegalMove(posititon, new Posititon(i, j))) {
-                    var square = getSquare(new Posititon(i, j));
+                if (model.isLegalMove(position, new Position(i, j))) {
+                    var square = getSquare(new Position(i, j));
                     square.getStyleClass().remove("possibleMoves");
                 }
             }
         }
     }
 
-    private void hideSelection(Posititon from, Posititon to) {
+    private void hideSelection(Position from, Position to) {
         hideLastMoves();
         var square = getSquare(from);
         var squareTo = getSquare(to);
@@ -166,7 +166,7 @@ public class ChessController {
         for (var i = 0; i < board.getRowCount(); i++) {
             for (var j = 0; j < board.getColumnCount(); j++) {
                 if (model.getPiece(i, j) == ChessPiece.BLACK_KING) {
-                    var square = getSquare(new Posititon(i, j));
+                    var square = getSquare(new Position(i, j));
                     square.getStyleClass().add("checkMate");
                 }
             }
@@ -177,7 +177,7 @@ public class ChessController {
         for (var i = 0; i < board.getRowCount(); i++) {
             for (var j = 0; j < board.getColumnCount(); j++) {
                 if (model.getPiece(i, j) == ChessPiece.WHITE_KING) {
-                    var square = getSquare(new Posititon(i, j));
+                    var square = getSquare(new Position(i, j));
                     square.getStyleClass().add("checkMate");
                 }
             }
@@ -187,13 +187,13 @@ public class ChessController {
     private void hideLastMoves() {
         for (var i = 0; i < board.getRowCount(); i++) {
             for (var j = 0; j < board.getColumnCount(); j++) {
-                var square = getSquare(new Posititon(i, j));
+                var square = getSquare(new Position(i, j));
                 square.getStyleClass().remove("lastMoveTo");
                 }
             }
         }
 
-    private StackPane getSquare(Posititon position) {
+    private StackPane getSquare(Position position) {
         for (var child : board.getChildren()) {
             if (GridPane.getRowIndex(child) == position.row() && GridPane.getColumnIndex(child) == position.col()) {
                 return (StackPane) child;
