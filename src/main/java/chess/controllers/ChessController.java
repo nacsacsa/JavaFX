@@ -1,6 +1,6 @@
-package chess.controller;
+package chess.controllers;
 
-import chess.model.Chess;
+import chess.model.ChessState;
 import chess.model.ChessPiece;
 import chess.model.Position;
 import chess.model.utils.EnumImageStorage;
@@ -21,7 +21,7 @@ public class ChessController {
 
     @FXML
     private GridPane board;
-    private final Chess model = new Chess();
+    private final ChessState model = new ChessState();
     private final TwoPhaseMoveSelector<Position> selector = new TwoPhaseMoveSelector<>(model);
     private final ImageStorage<ChessPiece> imageStorage = new EnumImageStorage<>(ChessPiece.class);
     @FXML

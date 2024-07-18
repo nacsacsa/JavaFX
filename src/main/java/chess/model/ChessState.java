@@ -1,19 +1,29 @@
 package chess.model;
 
-import chess.model.utils.TwoPhaseMoveState;
+import chess.model.utils.ChessTypeGameState;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 
-public class Chess implements TwoPhaseMoveState<Position> {
+public class ChessState implements ChessTypeGameState<Position> {
 
+    /**
+     * The size of the board.
+     */
     public static final int BOARD_SIZE = 8;
     private Player player;
     private final ReadOnlyObjectWrapper<ChessPiece>[][] board;
     private ChessPiece[][] tempBoard;
+
+    /**
+     * The checkmate board, which checks the enemy player pieces hit zones.
+     */
     public boolean[][] checkMateBoard = new boolean[BOARD_SIZE][BOARD_SIZE];
     private boolean[][] tempCheckMateBoard = new boolean[BOARD_SIZE][BOARD_SIZE];
 
-    public Chess() {
+    /**
+     * The constructor of the model.
+     */
+    public ChessState() {
         board = new ReadOnlyObjectWrapper[BOARD_SIZE][BOARD_SIZE];
         for (var i = 0; i < BOARD_SIZE; i++) {
             for (var j = 0; j < BOARD_SIZE; j++) {
@@ -554,10 +564,20 @@ public class Chess implements TwoPhaseMoveState<Position> {
         return chessPiece;
     }
 
+    /**
+     * {@return the piece from the given position as a property}
+     * @param row the row of the position
+     * @param col the column of the position
+     */
     public ReadOnlyObjectProperty<ChessPiece> getProperty(int row, int col) {
         return board[row][col].getReadOnlyProperty();
     }
 
+    /**
+     * {@return the piece from the given position}
+     * @param row the row of the position
+     * @param col the column of the position
+     */
     public ChessPiece getPiece(int row, int col) {
         if (isOnBoard(new Position(row, col))) {
             return board[row][col].get();
@@ -573,9 +593,12 @@ public class Chess implements TwoPhaseMoveState<Position> {
     }
 
     /**
-     * {@return whether it is checkmate}
+     * {@return if the {@code player} king is in checkmate or not}
+     *
+     * @param checkMateTable the table which contains the enemy player's pieces hit radius
      */
-    public boolean isCheckMate(boolean[][] checkMateBoard) {
+    @Override
+    public boolean isCheckMate(boolean[][] checkMateTable) {
         switch (getNextPlayer()) {
             case PLAYER_1 -> {
                 return isKingInCheckMate(ChessPiece.WHITE_KING, checkMateBoard);

@@ -4,21 +4,21 @@ import chess.model.utils.State;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static chess.model.Chess.BOARD_SIZE;
+import static chess.model.ChessState.BOARD_SIZE;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ChessTest {
+public class ChessStateTest {
 
-    Chess initial;
-    Chess inGameState;
-    Chess inCheckMateState;
-    Chess inWinState;
+    ChessState initial;
+    ChessState inGameState;
+    ChessState inCheckMateState;
+    ChessState inWinState;
 
     @BeforeEach
     public void StartUp() {
-        initial = new Chess();
+        initial = new ChessState();
 
-        inGameState = new Chess();
+        inGameState = new ChessState();
         inGameState.makeMove(new Position(6, 5), new Position(4, 5));
         inGameState.makeMove(new Position(1, 4), new Position(2, 4));
         inGameState.makeMove(new Position(6, 2), new Position(4, 2));
@@ -30,7 +30,7 @@ public class ChessTest {
         inGameState.makeMove(new Position(7, 2), new Position(5, 4));
         inGameState.makeMove(new Position(0, 2), new Position(1, 1));
 
-        inCheckMateState = new Chess();
+        inCheckMateState = new ChessState();
         inCheckMateState.makeMove(new Position(6, 5), new Position(4, 5));
         inCheckMateState.makeMove(new Position(1, 4), new Position(2, 4));
         inCheckMateState.makeMove(new Position(6, 2), new Position(4, 2));
@@ -43,7 +43,7 @@ public class ChessTest {
         inCheckMateState.makeMove(new Position(0, 2), new Position(1, 1));
         inCheckMateState.makeMove(new Position(4, 0), new Position(1, 3));
 
-        inWinState = new Chess();
+        inWinState = new ChessState();
         inWinState.makeMove(new Position(6, 5), new Position(5, 5));
         inWinState.makeMove(new Position(1, 4), new Position(3, 4));
         inWinState.makeMove(new Position(6, 6), new Position(4, 6));

@@ -1,5 +1,8 @@
 package chess.model;
 
+/**
+ * Representation of a chess piece.
+ */
 public enum ChessPiece {
     NONE,
     EMPTY,

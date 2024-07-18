@@ -1,3 +1,4 @@
+//Created by  Peter Jeszenszky
 package chess.model.utils;
 
 /**
